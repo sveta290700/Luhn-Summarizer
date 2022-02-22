@@ -35,7 +35,7 @@ def get_text_from_file(filename):
 	return text
 
 
-def get_keywords(word_list, min_ratio=0.001, max_ratio=0.5):
+def get_keywords(word_list, min_ratio=0.05, max_ratio=0.6):
 	# this method takes a word list and returns a set of keywords
 	assert (min_ratio < 1 and max_ratio < 1)
 	count_dict = {}
@@ -85,7 +85,7 @@ def get_sentence_weight(sentence, keywords):
 def summarize(in_file_name, out_file_name, max_no_of_sentences=10):
 	text = get_text_from_file(in_file_name)
 	word_list = get_words(text)
-	keywords = get_keywords(word_list, 0.05, 0.99)
+	keywords = get_keywords(word_list)
 	sentence_list = get_sentences(text)
 	# print sentence_list
 	sentence_weight = []
