@@ -1,11 +1,7 @@
-# Luhn-s-summarizer
-A summarizer script based on Luhn's summarization algorithm
+# Автоматическое реферирование: метод Луна
+Скрипт рефератора, основанный на алгоритме реферирования Луна.
 
-## Algorithm psuedocode :
-	1) Calculate signficant words in the text by means of a min and maximum
-	   ratio of occurence i.e ignore most frequent words and least frequent ones.  
-	2) For each sentence in the text calculate its weight based on the number of keywords squared
-	   divided by the windows size which is the maximum distance between two significant words.  
-	3) sort sentences in descending order based on their weight and output the first n of them.
-	
-
+## Принцип работы :
+    1) Подсчитать значимые слова в тексте, т.е. игнорировать наиболее часто встречающиеся и наименее часто встречающиеся слова.
+    2) Для каждого предложения в тексте рассчитать его вес, равный количеству значимых слов в квадрате, деленному на размер окна, который является максимальным расстоянием между двумя значимыми словами.
+    3) Отсортировать предложения по убыванию их веса и выведите первые n из них.
