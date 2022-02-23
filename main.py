@@ -26,19 +26,19 @@ def get_words(text):
 		token.lemmatize(morph_vocab)
 	words = []
 	for token in doc.tokens:
-		if token.pos != 'PUNCT' and token.pos != 'CCONJ' and token.pos != 'ADP':
+		if token.pos != 'PUNCT' and token.pos != 'CCONJ' and token.pos != 'SCONJ' and token.pos != 'PART' and token.pos != 'ADP':
 			words.append(token.lemma)
 	return words
 
 
-def get_keywords(word_list, min_ratio=0.01, max_ratio=0.5):
+def get_keywords(word_list, min_ratio=0.005, max_ratio=0.5):
 	assert (min_ratio < 1 and max_ratio < 1)
 	count_dict = {}
 	for word in word_list:
 		count_dict.setdefault(word, 0)
 		count_dict[word] += 1
 	keywords = set()
-	for word, cnt in count_dict.items():
+	for word, count in count_dict.items():
 		word_percentage = count_dict[word] * 1.0 / len(word_list)
 		if max_ratio >= word_percentage >= min_ratio:
 			keywords.add(word)
@@ -64,11 +64,11 @@ def get_sentence_weight(sentence, keywords):
 	if window_start > window_end:
 		return 0
 	window_size = window_end - window_start + 1
-	keywords_cnt = 0
+	keywords_count = 0
 	for w in sen_list:
 		if w in keywords:
-			keywords_cnt += 1
-	return keywords_cnt * keywords_cnt * 1.0 / window_size
+			keywords_count += 1
+	return keywords_count * keywords_count * 1.0 / window_size
 
 
 def intersection(lst1, lst2):
@@ -101,6 +101,6 @@ def summarize(in_file_name, out_file_name, max_no_of_sentences=10):
 	return ret_list_not_sorted
 
 
-summarized_text_list = summarize('text.txt', 'summary.txt', 10)
+summarized_text_list = summarize('text.txt', 'summary.txt')
 for sentence_in_summary in summarized_text_list:
 	print(sentence_in_summary)
